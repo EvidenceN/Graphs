@@ -1,5 +1,6 @@
 # Slides https://docs.google.com/presentation/d/1RLYNJ6TWHaDE4MypgLjvG1lq7_f6kJTib7qV9JH70OU/edit#slide=id.g9270846f40_2_375
 
+* Blog post about intro to graph https://medium.com/basecs/a-gentle-introduction-to-graph-theory-77969829ead8
 ## Intro to Graphs
 
 • A very versatile data structure that allows you to represent relationships between data
