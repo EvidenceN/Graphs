@@ -1,3 +1,5 @@
+# Slides https://docs.google.com/presentation/d/1RLYNJ6TWHaDE4MypgLjvG1lq7_f6kJTib7qV9JH70OU/edit#slide=id.g9270846f40_2_375
+
 ## Intro to Graphs
 
 • A very versatile data structure that allows you to represent relationships between data
@@ -61,7 +63,64 @@
 • Use a dictionary with sets to represent the edges of a particular vertex to other neighboring vertices
 • adjacencyList[i] is a list of all the edges to its neighbors for vertex i
 
+### ADJACENCY LIST RUNTIME/SPACE COMPLEXITIES
 
+• Space: O(vertices2)
+    • Imagine a dense graph
+• Add vertex: O(1)
+• Remove vertex: O(vertices)
+• Add edge: O(1)
+• Remove edge: O(1)
+• Find edge: O(1)
+• Get all edges: O(1)
 
+### ADJACENCY MATRIX
 
+• Use a matrix to represent whether or not there exists an edge between two vertices
+• matrix[i][j] is True if there exists an edge from vertex i to vertex j
+
+### ADJACENCY MATRIX RUNTIME/SPACE COMPLEXITIES
+
+• Space: O(vertices2)
+    • Even in a sparse graph, but good for dense graphs b/c lists are space efficient
+• Add vertex: O(vertices2)
+• Remove vertex: O(vertices2)
+• Add edge: O(1)
+• Remove edge: O(1)
+• Find edge: O(1)
+• Get all edges: O(vertices)
+
+### ADJACENCY MATRIX VS. ADJACENCY LISTS
+
+• The best representation mainly depends on whether or not the graph is sparse/dense and what you’re optimizing for (space/runtime)
+• Representing dense graphs are probably better with adjacency matrix because lists are very space efficient in comparison to dictionaries/sets
+• You’ll probably deal with more adjacency lists
+
+## Graph Traversals
+
+• There are two primary ways to traverse a graph: Depth-first and Breadth-first
+• Traversal vs. Search
+    • In a search, you stop once you find the node you’re searching for
+    • In a traversal, you traverse the entire graph
+
+### DEPTH-FIRST TRAVERSAL
+
+• Traverse the graph in a depth-ward motion using a stack/recursion
+
+### DEPTH-FIRST TRAVERSAL ITERATIVE PSEUDOCODE
+
+Picture in notebook
+
+### DEPTH-FIRST TRAVERSAL RECURSIVE PSEUDOCODE
+
+Picture in notebook
+
+### BREADTH-FIRST
+
+• Traverse the graph in a breadth-ward motion using a queue
+• Very useful for finding shortest path from node to node
+
+### BREADTH-FIRST SEARCH PSEUDOCODE
+
+Picture in notebook
 
