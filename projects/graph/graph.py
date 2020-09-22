@@ -72,28 +72,33 @@ class Graph:
                     stack.append(newPath)
 
 
-    def dft_recursive(self, starting_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
-
-        stack = deque()
         visited = set()
-        stack.append(starting_vertex)
+        return self.dfs_recursive_helper([starting_vertex], destination_vertex, visited)
+    
+    # returns path from starting vertex, to dest vertex else returns an empty list
+    def dfs_recursive_helper(self, curr_path, destination_vertex, visited):
+        curr_vertex = curr_path[-1]
+        if curr_vertex ==  destination_vertex:
+            return curr_path
 
-        if len(stack) == 0:
-            stack.append(starting_vertex)
-            currNode = stack.pop()
-            if currNode not in visited:
-                visited.add(currNode)
-                print(currNode)
-                for neighbor in self.get_neighbors(currNode):
-                    stack.append(neighbor)
-            self.dft_recursive(currNode)       
+        visited.add(curr_vertex)
 
+        for neighbor in self.get_neighbors(curr_vertex):
+            if neighbor not in visited:
+                newPath = list(curr_path)
+                newPath.append(neighbor)
+                res = self.dfs_recursive_helper(newPath, destination_vertex, visited)
+                if len(res) > 0:
+                    return res
+
+        return []
 
 
     def bfs(self, starting_vertex, destination_vertex):
@@ -118,7 +123,7 @@ class Graph:
                     newPath.append(neighbor)
                     stack.append(newPath)
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
+    #def dfs_recursive(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
@@ -184,7 +189,7 @@ if __name__ == '__main__':
     graph.dft(1)
 
     print(f"\ndepth first traversal recursive")
-    graph.dft_recursive(1)
+    #graph.dft_recursive(1)
 
     '''
     Valid BFS path:
