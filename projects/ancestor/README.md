@@ -46,3 +46,53 @@ Clarifications:
 * IDs will always be positive integers.
 * A parent may have any number of children.
 
+Vertices
+
+- Parents and kids
+
+Edges
+
+- path from parent to kids
+- undirectional
+
+{
+  10 : {1, 3, 6}
+  # 1: {3, 6}
+  # 3: {6}
+  # 6 : {} OLDEST ANCESTOR = 10 NO MATTER WHICH CHILD IS CHOSEN
+  # 4 : {5, 6, 7, 8, 9}
+  4 : {5, 6, 7, 8, 9}
+  # 5 : {6, 7}
+  7 : {}
+  # 2 : {3, 6}
+  11 : {8, 9}
+  8: {9}
+  9: {}
+
+}
+
+Type of graph to use. 
+
+List adjacent matrix 
+
+# Second Idea, use the child as the keys, and parents as values
+
+## LEETCODE
+
+        SA, SB = sum(A), sum(B)
+        for x in A:
+            for y in B:
+                if x + (SB - SA)/2 == y:
+                    return x, y
+
+[[x,y] for x in A for y in B if x + (SB - SA)/2 == y ]
+
+# from lecture
+
+* Vertices = Person/ID
+* edge = parent- child relationship
+* path = ancestor tree
+
+* Build a directed graph from child to parent
+
+* traverse a person's family tree upwards to its farthest ancestor
