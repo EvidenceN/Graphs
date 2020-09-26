@@ -26,47 +26,64 @@ world.print_rooms()
 # Player starts in Room 0
 player = Player(world.starting_room)
 
-# List will fill with directions to walk
+# give instructions of how to move to get through all the rooms
 traversal_path = []
 
-# Inverse directions N/S/E/W
-inverse = {"n": "s", "s": "n", "e": "w", "w": "e"}
+# Inverse directions to help keep track of previus rooms. so, if you are south, you most likely just came from north. 
+inverse_direction = {"n": "s", "s": "n", "e": "w", "w": "e"}
+
+# a list to keep track of previous rooms
 prev_room = []
 
 # Keep track of visited rooms 
 visited = set()
-# Keep track of exits explored 
-exits = {} # player.current_room.get_exits()
 
+# Keep track of room exits
+exits = {}
 
-# While all rooms have not been visited
+# room = vertices/nodes
+# traversal path = edges
+
+# run this code until all rooms are visited
+
+# while the number of visited rooms is less than the number of total rooms available. 
 while len(visited) < len(room_graph):
-    # Current room
+    # current room will start at 0
     room = player.current_room
-    # Get room exits
+    # get exits associated with that room number
     if room.id not in exits:
-        # add possible exits path
+        # add the exits directions associated with that room to the exits dictionary, using the room id as the key and directions as value 
         exits[room.id] = room.get_exits()
-        # mark current room as visited 
+        # add the current room id to visited list 
         visited.add(room.id)
 
-    # If there isn't an exit to traverse
+    # If there is no exit
+    # if no directions was added to exit dictionary in the previous if statement
     if len(exits[room.id]) <= 0:
-        # go back to last/prev direction
+        # go back to prev direction
         prev = prev_room.pop()
+        # tell the player where to go to next
         player.travel(prev)
-        # add direction to traversal path
+        # add direction of how the player got to that room to traversal path
         traversal_path.append(prev)
-    else:
-        # travel in next possible direction
-        next_exit = exits[room.id].pop()
-        player.travel(next_exit)
-        # add direction to traversal path
-        traversal_path.append(next_exit)
-        # add invesre to prev_room
-        prev_room.append(inverse[next_exit])
 
-print(traversal_path)
+    # if an exit_path exits in the room. which means the directions of that room was added to the room id inside the exits dictionary. 
+    else:
+        # travel in next direction
+        # your next exit will be the last item from the current room
+        next_exit = exits[room.id].pop()
+
+        # use the next specified exit to traverse into the next room
+        player.travel(next_exit)
+
+        # add next exit direction to traversal path
+        # add to the traversal path the instruction of how to move from the current room to the next room
+        traversal_path.append(next_exit)
+
+        # make a note of the previous room so that we can use it to go back to the previous room if there are no exits in the current room
+        prev_room.append(inverse_direction[next_exit])
+
+#print(prev_room)
 
 
 
@@ -90,12 +107,12 @@ else:
 # #######
 # # UNCOMMENT TO WALK AROUND
 # #######
-# player.current_room.print_room_description(player)
-# while True:
-#     cmds = input("-> ").lower().split(" ")
-#     if cmds[0] in ["n", "s", "e", "w"]:
-#         player.travel(cmds[0], True)
-#     elif cmds[0] == "q":
-#         break
-#     else:
-#         print("I did not understand that command.")
+#player.current_room.print_room_description(player)
+#while True:
+#    cmds = input("-> ").lower().split(" ")
+#    if cmds[0] in ["n", "s", "e", "w"]:
+#        player.travel(cmds[0], True)
+#    elif cmds[0] == "q":
+#        break
+#    else:
+#        print("I did not understand that command.")
